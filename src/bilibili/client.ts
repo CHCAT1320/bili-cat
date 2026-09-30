@@ -252,10 +252,19 @@ export class BilibiliClient {
     const url = new URL(fillPlaceholders(endpoint.url, signedParams));
     await this.ensureBuvid(credential);
     const cookie = cookieHeader(credential.getCookies());
+    // 表单 POST 必须显式声明 Content-Type：字符串 body 默认是 text/plain，
+    // 服务端不会解析出 csrf 字段，会直接返回 -111「CSRF 校验失败」。
+    const contentType = endpoint.json_body
+      ? "application/json"
+      : options.files
+        ? null
+        : "application/x-www-form-urlencoded";
     const headers: Record<string, string> = {
       ...this.headers,
       ...(cookie ? { Cookie: cookie } : {}),
-      ...(endpoint.json_body ? { "Content-Type": "application/json" } : {}),
+      ...(method !== "GET" && method !== "HEAD" && contentType
+        ? { "Content-Type": contentType }
+        : {}),
       ...options.headers,
     };
 
@@ -265,6 +274,8 @@ export class BilibiliClient {
       url.search = buildQuery(signedParams);
       init = { method, headers };
     } else if (options.files) {
+      // POST 的 params（wbi 签名、yjsl 的 aid/bvid 等）必须进查询串，不能丢
+      url.search = buildQuery(signedParams);
       const form = new FormData();
       for (const [key, value] of Object.entries(body)) {
         form.append(key, String(value));
@@ -274,6 +285,7 @@ export class BilibiliClient {
       }
       init = { method, headers, body: form };
     } else {
+      url.search = buildQuery(signedParams);
       init = {
         method,
         headers,

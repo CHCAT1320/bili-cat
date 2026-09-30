@@ -38,6 +38,21 @@
   border-radius: 4px;
 }
 
+.videoReason {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  max-width: calc(100% - 12px);
+  overflow: hidden;
+  padding: 1px 8px;
+  font-size: 0.6875rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #fff;
+  background: rgb(251 114 153 / 85%);
+  border-radius: 4px;
+}
+
 .videoTitle {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -62,6 +77,25 @@
   min-width: 0;
   font-size: 0.8125rem;
   color: #6b7280;
+}
+
+.videoStats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: -2px;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.videoStat {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.videoStatTime {
+  margin-left: auto;
 }
 
 .videoAvatar {

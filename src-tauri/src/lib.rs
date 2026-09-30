@@ -91,7 +91,31 @@ fn clamp_range(value: &str) -> Option<String> {
     Some(format!("bytes={start}-{end}"))
 }
 
+/// MSE 通过 fetch 请求分片时无法可靠地在跨域请求里带 Range 头（会触发预检），
+/// 所以支持把区间写进自定义协议的查询串：`bilistream://...?...&__range=start-end`。
+fn range_from_query(query: &str) -> Option<String> {
+    query
+        .split('&')
+        .find_map(|pair| pair.strip_prefix("__range=").map(|value| value.to_string()))
+}
+
+fn cors(builder: tauri::http::response::Builder) -> tauri::http::response::Builder {
+    builder
+        .header(header::ACCESS_CONTROL_ALLOW_ORIGIN, "*")
+        .header(header::ACCESS_CONTROL_ALLOW_HEADERS, "Range")
+        .header(
+            header::ACCESS_CONTROL_EXPOSE_HEADERS,
+            "Content-Range, Content-Length, Accept-Ranges, Content-Type",
+        )
+}
+
 async fn proxy(request: Request<Vec<u8>>) -> Result<Response<Vec<u8>>, String> {
+    if request.method() == tauri::http::Method::OPTIONS {
+        return cors(Response::builder().status(StatusCode::NO_CONTENT))
+            .body(Vec::new())
+            .map_err(|error| error.to_string());
+    }
+
     let encoded = request.uri().path().trim_start_matches('/');
     let target = percent_encoding::percent_decode_str(encoded)
         .decode_utf8()
@@ -109,10 +133,17 @@ async fn proxy(request: Request<Vec<u8>>) -> Result<Response<Vec<u8>>, String> {
     }
 
     let range = request
-        .headers()
-        .get(header::RANGE)
-        .and_then(|value| value.to_str().ok())
-        .and_then(clamp_range)
+        .uri()
+        .query()
+        .and_then(range_from_query)
+        .and_then(|value| clamp_range(&format!("bytes={value}")))
+        .or_else(|| {
+            request
+                .headers()
+                .get(header::RANGE)
+                .and_then(|value| value.to_str().ok())
+                .and_then(clamp_range)
+        })
         .unwrap_or_else(|| format!("bytes=0-{}", MAX_CHUNK - 1));
 
     let response = client()
@@ -126,7 +157,7 @@ async fn proxy(request: Request<Vec<u8>>) -> Result<Response<Vec<u8>>, String> {
         .map_err(|error| error.to_string())?;
 
     let status = response.status();
-    let mut builder = Response::builder().status(status);
+    let mut builder = cors(Response::builder().status(status));
     for name in [
         header::CONTENT_TYPE,
         header::CONTENT_LENGTH,
@@ -140,7 +171,6 @@ async fn proxy(request: Request<Vec<u8>>) -> Result<Response<Vec<u8>>, String> {
 
     let body = response.bytes().await.map_err(|error| error.to_string())?;
     builder
-        .header(header::ACCESS_CONTROL_ALLOW_ORIGIN, "*")
         .header(header::ACCEPT_RANGES, "bytes")
         .body(body.to_vec())
         .map_err(|error| error.to_string())
@@ -217,9 +247,40 @@ fn unique_path(dir: &std::path::Path, name: &str) -> std::path::PathBuf {
     candidate
 }
 
-/// 取纯文本资源（弹幕 XML 等）。reqwest 开了 gzip/brotli/deflate，
-/// 会自己发 Accept-Encoding 并按 Content-Encoding 解压，
-/// 否则拿到的是压缩后的乱码。
+/// 手动解压响应体。
+/// 不依赖 reqwest 的自动解压：B 站的弹幕 `list.so` 返回的是**裸 deflate**
+/// （没有 zlib 头），按规范解压会报 DecompressError，Python 侧也是用 -MAX_WBITS 解的。
+/// 这里不发 Accept-Encoding，所以只需处理 gzip 与 deflate 两种。
+fn decode_body(headers: &tauri::http::HeaderMap, bytes: &[u8]) -> Result<String, String> {
+    use std::io::Read;
+
+    let encoding = headers
+        .get(header::CONTENT_ENCODING)
+        .and_then(|value| value.to_str().ok())
+        .unwrap_or("")
+        .to_ascii_lowercase();
+
+    let mut reader: Box<dyn Read> = if bytes.starts_with(&[0x1f, 0x8b]) {
+        Box::new(flate2::read::GzDecoder::new(bytes))
+    } else if encoding.contains("deflate") {
+        // 0x78 开头是 zlib 包装，否则按裸 deflate 处理
+        if bytes.first() == Some(&0x78) {
+            Box::new(flate2::read::ZlibDecoder::new(bytes))
+        } else {
+            Box::new(flate2::read::DeflateDecoder::new(bytes))
+        }
+    } else {
+        return Ok(String::from_utf8_lossy(bytes).to_string());
+    };
+
+    let mut text = String::new();
+    reader
+        .read_to_string(&mut text)
+        .map_err(|error| format!("解压失败: {error}"))?;
+    Ok(text)
+}
+
+/// 取纯文本资源（弹幕 XML 等）
 #[tauri::command]
 async fn fetch_text(url: String) -> Result<String, String> {
     if !url.starts_with("https://") || !host_allowed(&url) {
@@ -238,7 +299,9 @@ async fn fetch_text(url: String) -> Result<String, String> {
         return Err(format!("HTTP {}", response.status().as_u16()));
     }
 
-    response.text().await.map_err(|error| error.to_string())
+    let headers = response.headers().clone();
+    let bytes = response.bytes().await.map_err(|error| error.to_string())?;
+    decode_body(&headers, &bytes)
 }
 
 /// 流式写盘并回调进度；抽出来是为了能单独跑联网冒烟测试
@@ -358,7 +421,7 @@ pub fn run() {
                 responder.respond(response);
             });
         })
-        .invoke_handler(tauri::generate_handler![greet, download_media])
+        .invoke_handler(tauri::generate_handler![greet, fetch_text, download_media])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
@@ -407,6 +470,16 @@ mod tests {
         );
         assert_eq!(clamp_range("bytes=200-100"), None);
         assert_eq!(clamp_range("items=0-"), None);
+    }
+
+    #[test]
+    fn extracts_range_query_param() {
+        assert_eq!(range_from_query("__range=0-100").as_deref(), Some("0-100"));
+        assert_eq!(
+            range_from_query("foo=1&__range=500-999").as_deref(),
+            Some("500-999")
+        );
+        assert!(range_from_query("foo=1").is_none());
     }
 
     #[test]
@@ -477,5 +550,52 @@ mod tests {
         assert!(received > 0, "没有收到任何字节");
         assert_eq!(received, written, "写入字节数与接收字节数不一致");
         println!("下载 {received} 字节，进度回调 {events} 次，文件 {}", path.display());
+    }
+
+    /// 弹幕 XML 是 deflate 压缩的，验证能解出明文：
+    ///   BILI_TEST_DANMAKU_CID=... cargo test --lib -- --ignored
+    #[tokio::test]
+    #[ignore = "需要网络"]
+    async fn fetches_danmaku_xml() {
+        let cid = std::env::var("BILI_TEST_DANMAKU_CID").expect("未设置 BILI_TEST_DANMAKU_CID");
+        let url = format!("https://api.bilibili.com/x/v1/dm/list.so?oid={cid}");
+        let response = client()
+            .get(&url)
+            .header(header::REFERER, REFERER)
+            .header(header::USER_AGENT, USER_AGENT)
+            .send()
+            .await
+            .expect("request failed");
+
+        let headers = response.headers().clone();
+        let bytes = response.bytes().await.expect("read bytes failed");
+        let text = decode_body(&headers, &bytes).expect("decode failed");
+
+        assert!(
+            text.starts_with("<?xml"),
+            "不是明文 XML: {}",
+            &text[..text.len().min(40)]
+        );
+        assert!(text.contains("<d p="), "没有弹幕条目");
+        println!(
+            "content-encoding={:?} 压缩后 {} 字节 → 明文 {} 字节，弹幕 {} 条",
+            headers.get(header::CONTENT_ENCODING),
+            bytes.len(),
+            text.len(),
+            text.matches("<d p=").count()
+        );
+    }
+
+    #[test]
+    fn decodes_plain_and_gzip_bodies() {
+        let empty = tauri::http::HeaderMap::new();
+        assert_eq!(decode_body(&empty, b"<i></i>").unwrap(), "<i></i>");
+
+        let mut encoder =
+            flate2::write::GzEncoder::new(Vec::new(), flate2::Compression::default());
+        use std::io::Write;
+        encoder.write_all(b"<?xml version=\"1.0\"?><i/>").unwrap();
+        let gzipped = encoder.finish().unwrap();
+        assert!(decode_body(&empty, &gzipped).unwrap().starts_with("<?xml"));
     }
 }

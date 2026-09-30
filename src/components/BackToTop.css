@@ -1,0 +1,29 @@
+.backToTop {
+  position: fixed;
+  right: 24px;
+  bottom: 28px;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: #374151;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 12%);
+}
+
+.backToTop:focus-visible {
+  outline: 2px solid #fb7299;
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .backToTop {
+    color: #d1d5db;
+    background: #1a1c21;
+    border-color: rgb(255 255 255 / 10%);
+  }
+}

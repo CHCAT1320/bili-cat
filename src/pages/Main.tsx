@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { AppHeader } from "../components/AppHeader";
+import { BackToTop } from "../components/BackToTop";
 import { FeedError } from "../components/FeedError";
 import { FeedFooter } from "../components/FeedFooter";
 import { FeedSkeleton } from "../components/FeedSkeleton";
@@ -49,6 +50,7 @@ function Main() {
           </>
         )}
       </div>
+      <BackToTop />
     </div>
   );
 }

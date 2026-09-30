@@ -1,0 +1,53 @@
+.commentTreeGuides {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.commentTreeGuides .commentTreeBranchLine {
+  fill: none;
+  stroke: rgba(148, 153, 160, 0.45);
+  stroke-width: 2px;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.commentTreeNode {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  font: inherit;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: #6b7280;
+  cursor: pointer;
+  background: #fff;
+  border: 2px solid rgba(148, 153, 160, 0.45);
+  border-radius: 50%;
+}
+
+.commentTreeNode:hover {
+  color: #fb7299;
+  border-color: #fb7299;
+}
+
+.commentTreeNode:focus-visible {
+  outline: 2px solid #fb7299;
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .commentTreeNode {
+    color: #9ca3af;
+    background: #1a1c21;
+  }
+}

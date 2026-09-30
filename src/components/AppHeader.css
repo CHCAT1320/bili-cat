@@ -197,11 +197,13 @@
 }
 
 .appAccountMenuItem {
+  display: block;
   width: 100%;
   padding: 8px 12px;
   font: inherit;
   font-size: 0.875rem;
   text-align: left;
+  text-decoration: none;
   color: #374151;
   background: transparent;
   border: 0;

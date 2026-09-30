@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import type { FavoriteFolder } from "../bilibili/userCenter";
+import { IconFolder } from "./icons";
 import "./FolderCard.css";
 
 interface FolderCardProps {
@@ -26,7 +27,11 @@ export function FolderCard({ folder, onClick }: FolderCardProps) {
             loading="lazy"
             referrerPolicy="no-referrer"
           />
-        ) : null}
+        ) : (
+          <span className="folderCoverPlaceholder" aria-hidden="true">
+            <IconFolder size={30} />
+          </span>
+        )}
       </div>
       <p className="folderTitle">{folder.title}</p>
       <p className="folderCount">{folder.mediaCount}</p>

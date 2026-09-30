@@ -33,6 +33,9 @@
     "home": "首页",
     "rank": "榜单",
     "bangumi": "番剧",
+    "dynamic": "动态",
+    "message": "消息",
+    "mySpace": "个人主页",
     "mine": "我的"
   },
   "bangumi": {
@@ -70,7 +73,9 @@
     "error": "加载失败",
     "retry": "重试",
     "noMore": "没有更多了",
-    "views": "播放"
+    "views": "播放",
+    "danmaku": "弹幕",
+    "backToTop": "回到顶部"
   },
   "search": {
     "placeholder": "搜索视频",
@@ -105,7 +110,8 @@
     "action": "下载",
     "running": "下载中 {{percent}}%",
     "openFolder": "打开文件夹",
-    "retry": "重试下载"
+    "retry": "重试下载",
+    "quality": "下载清晰度"
   },
   "video": {
     "view": "播放",
@@ -119,12 +125,84 @@
     "parts": "分P",
     "quality": "清晰度",
     "upHome": "UP主主页",
-    "openExternal": "在浏览器打开"
+    "unmute": "点击取消静音",
+    "actLike": "点赞",
+    "actLiked": "已赞",
+    "actCoin": "投币",
+    "actCoinCount": "投 {{count}} 币",
+    "actFavorite": "收藏",
+    "actTriple": "三连",
+    "actTripleHint": "点赞、投币、收藏一键完成",
+    "actFollow": "关注",
+    "actFollowing": "已关注",
+    "favTitle": "选择收藏夹",
+    "favSave": "保存",
+    "favEmpty": "还没有收藏夹"
+  },
+  "danmaku": {
+    "show": "显示弹幕",
+    "hide": "隐藏弹幕"
+  },
+  "comment": {
+    "title": "评论",
+    "placeholder": "发一条友善的评论",
+    "hint": "请友善发言",
+    "send": "发送",
+    "sending": "发送中…",
+    "empty": "还没有评论",
+    "more": "加载更多",
+    "replies": "{{count}} 条回复",
+    "reply": "回复",
+    "replyPlaceholder": "回复 @{{name}}",
+    "dislike": "点踩",
+    "cancel": "取消",
+    "sortHot": "热门",
+    "sortNew": "最新",
+    "expandReplies": "共 {{count}} 条回复，点击展开",
+    "moreReplies": "查看更多回复",
+    "collapse": "收起",
+    "expand": "展开",
+    "expandCount": "展开 {{count}} 条回复",
+    "host": "楼主",
+    "missingParent": "原评论已删除",
+    "mode": {
+      "lineKeepMain": { "label": "线条", "hint": "树状连线，收起时保留主评论" },
+      "lineCollapseMain": { "label": "收起主评论", "hint": "收起时同时折叠主评论正文" },
+      "indentOnly": { "label": "仅缩进", "hint": "只做层级缩进，不画连线" }
+    },
+    "loginToSend": "登录后发表评论",
+    "openMine": "去「我的」页面登录"
   },
   "space": {
     "fans": "粉丝",
     "following": "关注",
     "videos": "视频",
     "empty": "还没有投稿"
+  },
+  "dynamic": {
+    "tab": {
+      "following": "关注",
+      "hot": "热门"
+    },
+    "needLogin": "登录后查看关注动态",
+    "empty": "还没有动态",
+    "liveOn": "直播中",
+    "liveOff": "已结束",
+    "flagAigc": "AI生成",
+    "flagAudit": "审核中",
+    "flagOnlyFans": "仅粉丝可见",
+    "flagFolded": "已折叠"
+  },
+  "message": {
+    "tab": {
+      "replies": "回复我的",
+      "at": "提到我的",
+      "likes": "收到的赞",
+      "sessions": "私信"
+    },
+    "needLogin": "登录后查看消息",
+    "empty": "暂无消息",
+    "pickSession": "选择一位好友开始聊天",
+    "inputPlaceholder": "输入消息…"
   }
 }

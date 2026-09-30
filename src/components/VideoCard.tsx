@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import type { VideoCardData } from "../bilibili/feed";
-import { formatCount } from "../utils/format";
+import { formatCount, formatRelativeTime } from "../utils/format";
+import { IconComment, IconPlay } from "./icons";
 import "./VideoCard.css";
 
 interface VideoCardProps {
@@ -10,6 +11,7 @@ interface VideoCardProps {
 
 export function VideoCard({ video }: VideoCardProps) {
   const { t } = useTranslation();
+  const time = formatRelativeTime(video.pubDate);
 
   return (
     <Link className="videoCard" to={`/video/${video.bvid}`}>
@@ -20,8 +22,14 @@ export function VideoCard({ video }: VideoCardProps) {
             src={video.pic}
             alt={video.title}
             loading="lazy"
+            decoding="async"
             referrerPolicy="no-referrer"
           />
+        ) : null}
+        {video.reason ? (
+          <span className="videoReason" title={video.reason}>
+            {video.reason}
+          </span>
         ) : null}
         {video.duration ? (
           <span className="videoDuration">{video.duration}</span>
@@ -49,15 +57,27 @@ export function VideoCard({ video }: VideoCardProps) {
             src={video.upFace}
             alt=""
             loading="lazy"
+            decoding="async"
             referrerPolicy="no-referrer"
           />
         ) : (
           <span className="videoAvatar" />
         )}
         <span className="videoUpName">{video.upName}</span>
-        <span className="videoView">
-          {formatCount(video.view)} {t("main.views")}
+      </div>
+
+      <div className="videoStats">
+        <span className="videoStat" title={t("main.views")}>
+          <IconPlay size={13} />
+          {formatCount(video.view)}
         </span>
+        {video.danmaku ? (
+          <span className="videoStat" title={t("main.danmaku")}>
+            <IconComment size={13} />
+            {formatCount(video.danmaku)}
+          </span>
+        ) : null}
+        {time ? <span className="videoStat videoStatTime">{time}</span> : null}
       </div>
     </Link>
   );

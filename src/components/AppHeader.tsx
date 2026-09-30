@@ -105,6 +105,14 @@ export function AppHeader({ busy, onRefresh, showBack }: AppHeaderProps) {
           className={({ isActive }) =>
             isActive ? "appNavLink appNavLinkActive" : "appNavLink"
           }
+          to="/dynamic"
+        >
+          {t("nav.dynamic")}
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "appNavLink appNavLinkActive" : "appNavLink"
+          }
           to="/rank"
         >
           {t("nav.rank")}
@@ -116,6 +124,14 @@ export function AppHeader({ busy, onRefresh, showBack }: AppHeaderProps) {
           to="/bangumi"
         >
           {t("nav.bangumi")}
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "appNavLink appNavLinkActive" : "appNavLink"
+          }
+          to="/message"
+        >
+          {t("nav.message")}
         </NavLink>
         <NavLink
           className={({ isActive }) =>
@@ -228,6 +244,22 @@ export function AppHeader({ busy, onRefresh, showBack }: AppHeaderProps) {
             </button>
             {menuOpen ? (
               <div className="appAccountMenu">
+                {account.user?.mid ? (
+                  <Link
+                    className="appAccountMenuItem"
+                    to={`/space/${account.user.mid}`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {t("nav.mySpace")}
+                  </Link>
+                ) : null}
+                <Link
+                  className="appAccountMenuItem"
+                  to="/mine"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {t("nav.mine")}
+                </Link>
                 <button
                   type="button"
                   className="appAccountMenuItem"

@@ -33,6 +33,9 @@
     "home": "Home",
     "rank": "Rankings",
     "bangumi": "Anime",
+    "dynamic": "Feed",
+    "message": "Messages",
+    "mySpace": "My profile",
     "mine": "Mine"
   },
   "bangumi": {
@@ -70,7 +73,9 @@
     "error": "Failed to load",
     "retry": "Retry",
     "noMore": "No more videos",
-    "views": "views"
+    "views": "views",
+    "danmaku": "danmaku",
+    "backToTop": "Back to top"
   },
   "search": {
     "placeholder": "Search videos",
@@ -105,7 +110,8 @@
     "action": "Download",
     "running": "Downloading {{percent}}%",
     "openFolder": "Open folder",
-    "retry": "Retry download"
+    "retry": "Retry download",
+    "quality": "Download quality"
   },
   "video": {
     "view": "Views",
@@ -119,12 +125,84 @@
     "parts": "Parts",
     "quality": "Quality",
     "upHome": "Uploader page",
-    "openExternal": "Open in browser"
+    "unmute": "Unmute",
+    "actLike": "Like",
+    "actLiked": "Liked",
+    "actCoin": "Coin",
+    "actCoinCount": "Give {{count}} coin(s)",
+    "actFavorite": "Favorite",
+    "actTriple": "Triple",
+    "actTripleHint": "Like, coin and favorite in one tap",
+    "actFollow": "Follow",
+    "actFollowing": "Following",
+    "favTitle": "Choose folders",
+    "favSave": "Save",
+    "favEmpty": "No favorite folders"
+  },
+  "danmaku": {
+    "show": "Show danmaku",
+    "hide": "Hide danmaku"
+  },
+  "comment": {
+    "title": "Comments",
+    "placeholder": "Write a friendly comment",
+    "hint": "Be nice",
+    "send": "Send",
+    "sending": "Sending…",
+    "empty": "No comments yet",
+    "more": "Load more",
+    "replies": "{{count}} replies",
+    "reply": "Reply",
+    "replyPlaceholder": "Reply to @{{name}}",
+    "dislike": "Dislike",
+    "cancel": "Cancel",
+    "sortHot": "Hot",
+    "sortNew": "Newest",
+    "expandReplies": "{{count}} replies, tap to expand",
+    "moreReplies": "More replies",
+    "collapse": "Collapse",
+    "expand": "Expand",
+    "expandCount": "Show {{count}} replies",
+    "host": "OP",
+    "missingParent": "Original comment deleted",
+    "mode": {
+      "lineKeepMain": { "label": "Lines", "hint": "Tree lines; collapsing keeps the comment" },
+      "lineCollapseMain": { "label": "Collapse OP", "hint": "Collapsing also folds the comment body" },
+      "indentOnly": { "label": "Indent", "hint": "Indent only, no connector lines" }
+    },
+    "loginToSend": "Sign in to comment",
+    "openMine": "Sign in on the Mine page"
   },
   "space": {
     "fans": "followers",
     "following": "following",
     "videos": "videos",
     "empty": "No videos yet"
+  },
+  "dynamic": {
+    "tab": {
+      "following": "Following",
+      "hot": "Hot"
+    },
+    "needLogin": "Sign in to see your feed",
+    "empty": "No posts yet",
+    "liveOn": "LIVE",
+    "liveOff": "Ended",
+    "flagAigc": "AI generated",
+    "flagAudit": "In review",
+    "flagOnlyFans": "Followers only",
+    "flagFolded": "Folded"
+  },
+  "message": {
+    "tab": {
+      "replies": "Replies",
+      "at": "Mentions",
+      "likes": "Likes",
+      "sessions": "Direct messages"
+    },
+    "needLogin": "Sign in to see messages",
+    "empty": "No messages",
+    "pickSession": "Pick a friend to start chatting",
+    "inputPlaceholder": "Type a message…"
   }
 }

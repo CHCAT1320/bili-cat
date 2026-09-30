@@ -1,0 +1,9 @@
+.followButton {
+  flex: none;
+}
+
+.followButtonActive {
+  color: #fb7299;
+  background: rgb(251 114 153 / 10%);
+  border-color: #fb7299;
+}

@@ -1,0 +1,19 @@
+.danmakuLayer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.danmaku {
+  position: absolute;
+  left: 0;
+  white-space: nowrap;
+  font-weight: 500;
+  line-height: 1.2;
+  will-change: transform;
+  text-shadow:
+    0 0 2px rgb(0 0 0 / 90%),
+    0 0 2px rgb(0 0 0 / 90%);
+}

@@ -7,8 +7,11 @@ export interface FeedVideo {
   goto?: string;
   uri?: string;
   duration?: number;
+  pubdate?: number;
   owner?: { mid?: number; name?: string; face?: string };
-  stat?: { view?: number };
+  stat?: { view?: number; danmaku?: number; like?: number };
+  rcmd_reason?: { content?: string } | null;
+  badge?: string;
 }
 
 export interface Feed {
@@ -43,6 +46,10 @@ export interface VideoCardData {
   upName?: string;
   upFace?: string;
   view?: number;
+  danmaku?: number;
+  pubDate?: number;
+  /** 推荐理由（如「已关注」「热门」），推荐流可能带 */
+  reason?: string;
   /** 搜索结果的命中词分段，用于高亮；推荐流不带 */
   titleParts?: TitlePart[];
 }
@@ -99,6 +106,9 @@ export function feedToCard(video: FeedVideo): VideoCardData {
     upName: video.owner?.name,
     upFace: coverUrl(video.owner?.face ?? ""),
     view: video.stat?.view,
+    danmaku: video.stat?.danmaku,
+    pubDate: video.pubdate,
+    reason: video.rcmd_reason?.content || undefined,
   };
 }
 

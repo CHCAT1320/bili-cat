@@ -1,0 +1,489 @@
+.dynamicPage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.dynamicBody {
+  flex: 1;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 28px 48px;
+}
+
+.dynamicTabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.dynamicTab {
+  padding: 6px 18px;
+  font: inherit;
+  font-size: 0.875rem;
+  color: #6b7280;
+  background: #f3f4f6;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.dynamicTabActive {
+  color: #fb7299;
+  background: rgb(251 114 153 / 10%);
+  border-color: #fb7299;
+}
+
+.dynamicTab:focus-visible {
+  outline: 2px solid #fb7299;
+  outline-offset: 2px;
+}
+
+.dynamicList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dynamicCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+.dynamicHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dynamicAvatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  background: #e9eaec;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dynamicHeadText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dynamicNameRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.dynamicAuthor {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  text-decoration: none;
+}
+
+.dynamicLabel {
+  padding: 0 5px;
+  font-size: 0.6875rem;
+  line-height: 15px;
+  color: #fb7299;
+  background: rgb(251 114 153 / 12%);
+  border-radius: 4px;
+}
+
+.dynamicOfficial {
+  font-size: 0.6875rem;
+  color: #f9a825;
+}
+
+.dynamicTime {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.dynamicFlags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.dynamicFlag {
+  padding: 1px 8px;
+  font-size: 0.6875rem;
+  color: #6b7280;
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.dynamicDispute {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px;
+  font-size: 0.8125rem;
+  color: #92400e;
+  background: #fef3c7;
+  border-radius: 8px;
+}
+
+.dynamicText {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: #374151;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.dynamicLink {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.dynamicEmoji {
+  width: 20px;
+  height: 20px;
+  vertical-align: -4px;
+  object-fit: contain;
+}
+
+.dynamicEmojiBig {
+  width: 32px;
+  height: 32px;
+  vertical-align: -8px;
+}
+
+.dynamicNone {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+/* 主卡片 / 附加卡片 */
+.dynamicCardBox {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.dynamicCardBoxSmall {
+  background: #f3f4f6;
+}
+
+.dynamicCardCoverBox {
+  position: relative;
+  flex: none;
+  width: 140px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #e9eaec;
+  border-radius: 8px;
+}
+
+.dynamicCardCover {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.dynamicCardDuration {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  padding: 1px 6px;
+  font-size: 0.6875rem;
+  color: #fff;
+  background: rgb(0 0 0 / 65%);
+  border-radius: 4px;
+}
+
+.dynamicCardLive {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  padding: 1px 6px;
+  font-size: 0.6875rem;
+  color: #fff;
+  background: rgb(0 0 0 / 60%);
+  border-radius: 4px;
+}
+
+.dynamicCardLiveOn {
+  background: #fb7299;
+}
+
+.dynamicCardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  flex: 1;
+}
+
+.dynamicCardTitle {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #111827;
+}
+
+.dynamicCardDesc,
+.dynamicCardStat {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.dynamicCardLabel {
+  align-self: flex-start;
+  padding: 0 6px;
+  font-size: 0.6875rem;
+  color: #fb7299;
+  background: rgb(251 114 153 / 12%);
+  border-radius: 4px;
+}
+
+.dynamicCardBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 1px 6px;
+  font-size: 0.6875rem;
+  color: #fff;
+  background: rgb(0 0 0 / 45%);
+  border-radius: 4px;
+}
+
+/* 图片 */
+.dynamicImages {
+  display: grid;
+  gap: 6px;
+}
+
+.dynamicImages-single {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 60%;
+}
+
+.dynamicImages-two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.dynamicImages-three {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.dynamicImage {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: #e9eaec;
+  border-radius: 8px;
+}
+
+.dynamicImages-single .dynamicImage {
+  aspect-ratio: auto;
+  max-height: 420px;
+}
+
+/* 投票 / 预约 */
+.dynamicVote {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 10px;
+}
+
+.dynamicVoteTitle {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.dynamicVoteDesc {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.dynamicVoteOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dynamicVoteOption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 10px;
+  font-size: 0.8125rem;
+  color: #374151;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.dynamicVoteCount {
+  color: #9ca3af;
+}
+
+/* 商品 */
+.dynamicGoods {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dynamicGoodsItems {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.dynamicGoodsItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dynamicGoodsCover {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: #e9eaec;
+  border-radius: 8px;
+}
+
+.dynamicGoodsName {
+  font-size: 0.75rem;
+  color: #374151;
+}
+
+.dynamicGoodsPrice {
+  font-size: 0.75rem;
+  color: #fb7299;
+}
+
+/* 转发 */
+.dynamicForward {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  background: #f3f4f6;
+  border-radius: 10px;
+}
+
+.dynamicForwardName {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+/* 热门评论 */
+.dynamicInteraction {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 10px 12px;
+  list-style: none;
+  background: #f9fafb;
+  border-radius: 10px;
+}
+
+.dynamicInteractionItem {
+  font-size: 0.8125rem;
+  color: #6b7280;
+}
+
+.dynamicFold {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #9ca3af;
+}
+
+.dynamicFoot {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-size: 0.8125rem;
+  color: #6b7280;
+}
+
+.dynamicStat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dynamicCard {
+    background: #1a1c21;
+    border-color: rgb(255 255 255 / 8%);
+  }
+
+  .dynamicAuthor,
+  .dynamicCardTitle,
+  .dynamicVoteTitle {
+    color: #f3f4f6;
+  }
+
+  .dynamicText,
+  .dynamicVoteOption {
+    color: #d1d5db;
+  }
+
+  .dynamicTab,
+  .dynamicFlag {
+    color: #9ca3af;
+    background: #23262d;
+  }
+
+  .dynamicCardBox,
+  .dynamicVote,
+  .dynamicInteraction {
+    background: #22252b;
+  }
+
+  .dynamicForward {
+    background: #23262d;
+  }
+
+  .dynamicAvatar,
+  .dynamicCardCoverBox,
+  .dynamicImage,
+  .dynamicGoodsCover {
+    background: #23262d;
+  }
+
+  .dynamicVoteOption {
+    background: #1a1c21;
+    border-color: rgb(255 255 255 / 10%);
+  }
+}

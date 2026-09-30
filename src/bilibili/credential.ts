@@ -66,6 +66,10 @@ export class Credential {
    * 从 Set-Cookie 数组里取凭证。
    * 每条形如 `SESSDATA=xxx; Path=/; Domain=.bilibili.com; ...`，
    * 只取第一段键值对，否则 Path/Domain 会被当成 cookie 名。
+   *
+   * WebView 有时拿不到 getSetCookie()，只能得到一条把多个 Set-Cookie
+   * 拼在一起的字符串；此时再用正则兜底抽取我们关心的字段，避免丢掉 bili_jct
+   * （所有写操作都要它，缺了就会出现「能看不能操作」）。
    */
   static fromSetCookie(list: string[]): Credential {
     const jar: Record<string, string> = {};
@@ -73,6 +77,22 @@ export class Credential {
       const first = entry.split(";")[0] ?? "";
       Object.assign(jar, parseCookiePairs(first));
     }
+
+    const known = [
+      "SESSDATA",
+      "bili_jct",
+      "DedeUserID",
+      "buvid3",
+      "buvid4",
+      "ac_time_value",
+    ];
+    const joined = list.join(",");
+    for (const name of known) {
+      if (jar[name]) continue;
+      const match = new RegExp(`(?:^|[,\\s])${name}=([^;,]+)`).exec(joined);
+      if (match) jar[name] = match[1].trim();
+    }
+
     return Credential.fromCookies(jar);
   }
 

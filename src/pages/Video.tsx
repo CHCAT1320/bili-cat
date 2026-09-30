@@ -1,19 +1,24 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router";
 import { coverUrl } from "../bilibili/feed";
 import { parseVideoId } from "../bilibili/videoId";
 import { AppHeader } from "../components/AppHeader";
+import { CommentSection } from "../components/CommentSection";
+import { DanmakuLayer } from "../components/DanmakuLayer";
+import { DashVideo } from "../components/DashVideo";
 import { DownloadButton } from "../components/DownloadButton";
 import { FeedError } from "../components/FeedError";
+import { FollowButton } from "../components/FollowButton";
+import { LoginDialog } from "../components/LoginDialog";
+import { VideoActions } from "../components/VideoActions";
+import { useAccount } from "../hooks/useAccount";
+import { useDanmaku } from "../hooks/useDanmaku";
 import { usePlayUrl } from "../hooks/usePlayUrl";
 import { useVideoDetail } from "../hooks/useVideoDetail";
-import { openExternal } from "../utils/external";
 import { formatCount, formatDuration } from "../utils/format";
 import { streamUrl } from "../utils/stream";
 import "./Video.css";
-
-const WEB_URL = "https://www.bilibili.com/video/";
 
 function Video() {
   const { t } = useTranslation();
@@ -21,16 +26,38 @@ function Video() {
   const videoId = useMemo(() => parseVideoId(rawId), [rawId]);
   const { video, status, error, reload } = useVideoDetail(videoId);
   const [page, setPage] = useState(1);
+  const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null);
+  const [autoMuted, setAutoMuted] = useState(false);
   const part = video?.pages?.find((item) => item.page === page);
   const cid = part?.cid ?? video?.cid ?? 0;
   const play = usePlayUrl(video?.bvid ?? "", cid);
+  const danmaku = useDanmaku(cid);
+  const account = useAccount();
+  const [loginOpen, setLoginOpen] = useState(false);
+  const loggedIn = Boolean(account.user?.isLogin);
   const src = streamUrl(play.source);
+  const startedRef = useRef("");
 
   useEffect(() => {
     setPage(1);
   }, [rawId]);
 
-  const embedUrl = `https://player.bilibili.com/player.html?bvid=${encodeURIComponent(video?.bvid ?? "")}&p=${page}&autoplay=0&danmaku=0&high_quality=1`;
+  // 自动开播：带声音被自动播放策略拦下时，降级为静音并提示取消静音
+  useEffect(() => {
+    const node = videoEl;
+    if (!node || !src || startedRef.current === src) return;
+    startedRef.current = src;
+    const attempt = node.play();
+    if (attempt && typeof attempt.catch === "function") {
+      attempt.catch(() => {
+        node.muted = true;
+        setAutoMuted(true);
+        void node.play().catch(() => {});
+      });
+    }
+  }, [src, videoEl]);
+
+  const embedUrl = `https://player.bilibili.com/player.html?bvid=${encodeURIComponent(video?.bvid ?? "")}&p=${page}&autoplay=1&danmaku=0&high_quality=1`;
 
   const stats = video
     ? [
@@ -55,14 +82,65 @@ function Video() {
         ) : (
           <>
             <div className="videoPlayer">
-              {src ? (
-                <video
-                  className="videoMedia"
-                  src={src}
-                  controls
-                  preload="metadata"
-                  playsInline
-                />
+              {play.kind === "dash" && play.dash ? (
+                <>
+                  <DashVideo
+                    video={play.dash.video}
+                    audio={play.dash.audio}
+                    onElement={setVideoEl}
+                    onAutoMuted={() => setAutoMuted(true)}
+                  />
+                  <DanmakuLayer
+                    items={danmaku.items}
+                    video={videoEl}
+                    enabled={danmaku.enabled}
+                  />
+                  {autoMuted ? (
+                    <button
+                      type="button"
+                      className="videoUnmute"
+                      onClick={() => {
+                        if (!videoEl) return;
+                        videoEl.muted = false;
+                        videoEl.volume = 1;
+                        setAutoMuted(false);
+                      }}
+                    >
+                      {t("video.unmute")}
+                    </button>
+                  ) : null}
+                </>
+              ) : src ? (
+                <>
+                  <video
+                    ref={setVideoEl}
+                    className="videoMedia"
+                    src={src}
+                    controls
+                    autoPlay
+                    playsInline
+                    preload="metadata"
+                  />
+                  <DanmakuLayer
+                    items={danmaku.items}
+                    video={videoEl}
+                    enabled={danmaku.enabled}
+                  />
+                  {autoMuted ? (
+                    <button
+                      type="button"
+                      className="videoUnmute"
+                      onClick={() => {
+                        if (!videoEl) return;
+                        videoEl.muted = false;
+                        videoEl.volume = 1;
+                        setAutoMuted(false);
+                      }}
+                    >
+                      {t("video.unmute")}
+                    </button>
+                  ) : null}
+                </>
               ) : (
                 <iframe
                   src={embedUrl}
@@ -73,25 +151,40 @@ function Video() {
               )}
             </div>
 
-            {play.qualities.length > 1 ? (
-              <div className="videoQualities">
-                <span className="videoQualitiesLabel">{t("video.quality")}</span>
-                {play.qualities.map((item) => (
-                  <button
-                    key={item.quality}
-                    type="button"
-                    className={
-                      item.quality === play.quality
-                        ? "videoQuality videoQualityActive"
-                        : "videoQuality"
-                    }
-                    onClick={() => play.selectQuality(item.quality)}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            ) : null}
+            <div className="videoControls">
+              {play.qualities.length > 1 ? (
+                <span className="videoQualities">
+                  <span className="videoQualitiesLabel">
+                    {t("video.quality")}
+                  </span>
+                  {play.qualities.map((item) => (
+                    <button
+                      key={item.quality}
+                      type="button"
+                      className={
+                        item.quality === play.quality
+                          ? "videoQuality videoQualityActive"
+                          : "videoQuality"
+                      }
+                      onClick={() => play.selectQuality(item.quality)}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </span>
+              ) : null}
+
+              <button
+                type="button"
+                className="appButton"
+                onClick={danmaku.toggle}
+                disabled={danmaku.items.length === 0}
+                title={danmaku.error}
+              >
+                {danmaku.enabled ? t("danmaku.hide") : t("danmaku.show")}
+                {danmaku.items.length > 0 ? ` · ${danmaku.items.length}` : ""}
+              </button>
+            </div>
 
             <h1 className="videoHeading">{video.title}</h1>
 
@@ -113,20 +206,23 @@ function Video() {
                 </p>
               </div>
               {video.owner?.mid ? (
+                <FollowButton
+                  mid={video.owner.mid}
+                  loggedIn={loggedIn}
+                  onRequireLogin={() => setLoginOpen(true)}
+                />
+              ) : null}
+              {video.owner?.mid ? (
                 <Link className="appButton" to={`/space/${video.owner.mid}`}>
                   {t("video.upHome")}
                 </Link>
               ) : null}
-              <button
-                type="button"
-                className="appButton"
-                onClick={() => openExternal(`${WEB_URL}${video.bvid}`)}
-              >
-                {t("video.openExternal")}
-              </button>
               <DownloadButton
-                url={play.source}
-                fileName={`${video.title}-${play.quality}p`}
+                url={play.downloadUrl || play.source}
+                fileName={video.title}
+                qualities={play.qualities}
+                quality={play.quality}
+                resolve={play.resolveDownload}
               />
             </div>
 
@@ -138,6 +234,18 @@ function Video() {
                 </li>
               ))}
             </ul>
+
+            <VideoActions
+              aid={video.aid}
+              bvid={video.bvid}
+              mid={video.owner?.mid ?? 0}
+              loggedIn={loggedIn}
+              like={video.stat?.like ?? 0}
+              coin={video.stat?.coin ?? 0}
+              favorite={video.stat?.favorite ?? 0}
+              share={video.stat?.share ?? 0}
+              onRequireLogin={() => setLoginOpen(true)}
+            />
 
             {video.desc ? (
               <section className="videoSection">
@@ -173,9 +281,13 @@ function Video() {
                 </ol>
               </section>
             ) : null}
+
+            <CommentSection aid={video.aid} />
           </>
         )}
       </div>
+
+      <LoginDialog open={loginOpen} onClose={() => setLoginOpen(false)} />
     </div>
   );
 }

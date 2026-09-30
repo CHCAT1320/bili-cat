@@ -3,8 +3,10 @@ import { Route, Routes } from "react-router";
 import { refreshAccount } from "./bilibili/account";
 import Bangumi from "./pages/Bangumi";
 import BangumiSeason from "./pages/BangumiSeason";
+import Dynamic from "./pages/Dynamic";
 import Home from "./pages/Home";
 import Main from "./pages/Main";
+import Message from "./pages/Message";
 import Mine from "./pages/Mine";
 import Rank from "./pages/Rank";
 import Search from "./pages/Search";
@@ -23,6 +25,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/main" element={<Main />} />
         <Route path="/rank" element={<Rank />} />
+        <Route path="/dynamic" element={<Dynamic />} />
+        <Route path="/message" element={<Message />} />
         <Route path="/bangumi" element={<Bangumi />} />
         <Route path="/bangumi/:seasonId" element={<BangumiSeason />} />
         <Route path="/mine" element={<Mine />} />

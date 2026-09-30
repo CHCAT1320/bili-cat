@@ -27,3 +27,33 @@
     border-color: rgb(255 255 255 / 10%);
   }
 }
+
+.downloadGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.downloadQuality {
+  padding: 6px 8px;
+  font: inherit;
+  font-size: 0.8125rem;
+  color: #374151;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.downloadQuality:focus-visible {
+  outline: 2px solid #fb7299;
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .downloadQuality {
+    color: #d1d5db;
+    background: #23262d;
+    border-color: rgb(255 255 255 / 10%);
+  }
+}

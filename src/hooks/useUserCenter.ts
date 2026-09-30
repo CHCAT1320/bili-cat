@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { API, client } from "../bilibili";
-import { type VideoCardData } from "../bilibili/feed";
+import { coverUrl, type VideoCardData } from "../bilibili/feed";
 import {
   toFolder,
   toFollowCard,
@@ -133,10 +133,33 @@ export function useFavoriteFolders(mid: number, enabled: boolean) {
         API.common.favorite.get_favorite_list,
         { params: { up_mid: mid } },
       );
-      return {
-        items: (data.list ?? []).map(toFolder).filter((folder) => folder.id > 0),
-        hasMore: false,
-      };
+      const items = (data.list ?? [])
+        .map(toFolder)
+        .filter((folder) => folder.id > 0);
+
+      // list-all 对部分收藏夹不返回 cover，用夹内第一条视频的封面兜底
+      const missing = items.filter(
+        (folder) => !folder.cover && folder.mediaCount > 0,
+      );
+      await Promise.all(
+        missing.map(async (folder) => {
+          try {
+            const content = await client.request<{ medias?: unknown[] }>(
+              API.common.favorite.get_favorite_list_content,
+              { params: { media_id: folder.id, ps: 1, pn: 1 } },
+            );
+            const first = (content.medias ?? [])[0] as
+              | Record<string, unknown>
+              | undefined;
+            const cover = coverUrl(String(first?.cover ?? first?.pic ?? ""));
+            if (cover) folder.cover = cover;
+          } catch {
+            /* 取不到封面就让卡片显示占位 */
+          }
+        }),
+      );
+
+      return { items, hasMore: false };
     },
     enabled && mid > 0,
     `folders-${mid}`,

@@ -14,6 +14,13 @@ dist-ssr
 bilibili_api_python-17.4.2
 .kilo
 
+# TypeScript incremental build info
+*.tsbuildinfo
+
+# 只保留 npm 的 lockfile，bun 的忽略
+bun.lock
+bun.lockb
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
