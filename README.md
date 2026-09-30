@@ -1,6 +1,6 @@
-# bili-cat
+# Bili-Cat
 
-<img src="public/bili-cat-icon.svg" width="112" alt="bili-cat" />
+<img src="public/bili-cat-icon.svg" width="112" alt="Bili-Cat" />
 
 > 更好用的 B 站桌面客户端
 

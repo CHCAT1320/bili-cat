@@ -117,7 +117,7 @@ export function IconPlay({ size = 14, className }: IconProps) {
   );
 }
 
-/** bili-cat 应用图标：B站小电视造型 + 猫元素（猫瞳/猫鼻/猫须） */
+/** Bili-Cat 应用图标：B站小电视造型 + 猫元素（猫瞳/猫鼻/猫须） */
 export function BiliCatLogo({ size = 40, className }: IconProps) {
   return (
     <svg
@@ -126,7 +126,7 @@ export function BiliCatLogo({ size = 40, className }: IconProps) {
       viewBox="0 0 128 128"
       className={className}
       role="img"
-      aria-label="bili-cat"
+      aria-label="Bili-Cat"
     >
       <g stroke="#fb7299" strokeWidth="8" strokeLinecap="round" fill="none">
         <path d="M52 40 L30 12" />

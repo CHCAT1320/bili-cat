@@ -21,7 +21,7 @@
   },
   "login": {
     "action": "登录",
-    "title": "登录 bili-cat",
+    "title": "登录 Bili-Cat",
     "close": "关闭",
     "qrcode": "扫码登录",
     "cookie": "Cookie 登录",

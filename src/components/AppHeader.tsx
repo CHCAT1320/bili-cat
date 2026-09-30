@@ -89,7 +89,7 @@ export function AppHeader({ busy, onRefresh, showBack }: AppHeaderProps) {
   return (
     <header className="appHeader">
       <Link className="appLogo" to="/main">
-        bili-cat
+        Bili-Cat
       </Link>
 
       <nav className="appNav">
