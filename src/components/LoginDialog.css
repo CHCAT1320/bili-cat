@@ -1,0 +1,134 @@
+.loginMask {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgb(0 0 0 / 45%);
+}
+
+.loginPanel {
+  width: 100%;
+  max-width: 360px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 25%);
+}
+
+.loginTabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 12px 0;
+}
+
+.loginTab {
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 0.875rem;
+  color: #4b5563;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.loginTabActive {
+  color: #fb7299;
+  background: rgb(251 114 153 / 10%);
+  font-weight: 600;
+}
+
+.loginClose {
+  margin-left: auto;
+  padding: 0 8px;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #9ca3af;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.loginBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px 24px;
+}
+
+.loginQr {
+  width: 220px;
+  height: 220px;
+  border-radius: 8px;
+}
+
+.loginQrDim {
+  opacity: 0.3;
+}
+
+.loginQrPlaceholder {
+  background: #f3f4f6;
+}
+
+.loginHint {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+.loginError {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #dc2626;
+  text-align: center;
+  word-break: break-all;
+}
+
+.loginTextarea {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 0.8125rem;
+  color: #111827;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  resize: vertical;
+}
+
+.loginTextarea:focus {
+  outline: none;
+  border-color: #fb7299;
+  background: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .loginPanel {
+    background: #1a1c21;
+  }
+
+  .loginTab {
+    color: #9ca3af;
+  }
+
+  .loginQrPlaceholder {
+    background: #23262d;
+  }
+
+  .loginHint {
+    color: #9ca3af;
+  }
+
+  .loginTextarea {
+    color: #f3f4f6;
+    background: #23262d;
+    border-color: rgb(255 255 255 / 10%);
+  }
+}

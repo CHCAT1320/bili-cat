@@ -1,0 +1,130 @@
+{
+  "home": {
+    "title": "Welcome👋",
+    "subtitle": "Bili-Cat",
+    "text": "Here you can discover all kinds of interesting content.",
+    "cta": "Start exploring"
+  },
+  "common": {
+    "back": "Back"
+  },
+  "login": {
+    "action": "Sign in",
+    "title": "Sign in to bili-cat",
+    "close": "Close",
+    "qrcode": "QR code",
+    "cookie": "Cookie",
+    "submit": "Sign in",
+    "refresh": "Refresh QR code",
+    "logout": "Sign out",
+    "invalidCookie": "No SESSDATA found, please check the pasted content",
+    "cookieHint": "Open bilibili.com in a browser and paste the full cookie from devtools",
+    "cookiePlaceholder": "SESSDATA=...; bili_jct=...; DedeUserID=...",
+    "state": {
+      "loading": "Loading QR code…",
+      "pending": "Scan with the Bilibili mobile app",
+      "scanned": "Scanned, please confirm on your phone",
+      "success": "Signed in",
+      "expired": "QR code expired",
+      "failed": "Failed"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "rank": "Rankings",
+    "bangumi": "Anime",
+    "mine": "Mine"
+  },
+  "bangumi": {
+    "today": "Today",
+    "delayed": "Delayed",
+    "total": "total",
+    "episodes": "Episodes",
+    "noPlay": "This episode is unavailable (may require a premium account)",
+    "weekday": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    }
+  },
+  "mine": {
+    "favorite": "Favorites",
+    "history": "History",
+    "toview": "Watch later",
+    "following": "Following",
+    "empty": "Nothing here yet",
+    "needLogin": "Sign in to view",
+    "backToFolders": "Back to folders"
+  },
+  "rank": {
+    "popular": "Popular",
+    "ranking": "Ranking"
+  },
+  "main": {
+    "refresh": "Refresh",
+    "loading": "Loading…",
+    "error": "Failed to load",
+    "retry": "Retry",
+    "noMore": "No more videos",
+    "views": "views"
+  },
+  "search": {
+    "placeholder": "Search videos",
+    "action": "Search",
+    "results": "{{count}} videos found",
+    "empty": "No matching videos",
+    "suggestions": "Search suggestions",
+    "sortLabel": "Sort",
+    "durationLabel": "Duration",
+    "typeLabel": "Type",
+    "type": {
+      "video": "Videos",
+      "bili_user": "Uploaders"
+    },
+    "userResults": "{{count}} uploaders found",
+    "order": {
+      "totalrank": "Best match",
+      "click": "Most played",
+      "pubdate": "Newest",
+      "danmaku": "Most danmaku",
+      "stow": "Most favorited"
+    },
+    "duration": {
+      "all": "Any length",
+      "short": "Under 10 min",
+      "medium": "10-30 min",
+      "long": "30-60 min",
+      "veryLong": "Over 60 min"
+    }
+  },
+  "download": {
+    "action": "Download",
+    "running": "Downloading {{percent}}%",
+    "openFolder": "Open folder",
+    "retry": "Retry download"
+  },
+  "video": {
+    "view": "Views",
+    "danmaku": "Danmaku",
+    "like": "Likes",
+    "coin": "Coins",
+    "favorite": "Favorites",
+    "share": "Shares",
+    "reply": "Comments",
+    "desc": "Description",
+    "parts": "Parts",
+    "quality": "Quality",
+    "upHome": "Uploader page",
+    "openExternal": "Open in browser"
+  },
+  "space": {
+    "fans": "followers",
+    "following": "following",
+    "videos": "videos",
+    "empty": "No videos yet"
+  }
+}

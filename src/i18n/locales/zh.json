@@ -1,0 +1,130 @@
+{
+  "home": {
+    "title": "欢迎👋",
+    "subtitle": "Bili-Cat",
+    "text": "在这里，你可以找到各种有趣的内容。",
+    "cta": "开始探索"
+  },
+  "common": {
+    "back": "返回"
+  },
+  "login": {
+    "action": "登录",
+    "title": "登录 bili-cat",
+    "close": "关闭",
+    "qrcode": "扫码登录",
+    "cookie": "Cookie 登录",
+    "submit": "登录",
+    "refresh": "刷新二维码",
+    "logout": "退出登录",
+    "invalidCookie": "未识别到 SESSDATA，请检查粘贴内容",
+    "cookieHint": "在浏览器打开 bilibili.com，从开发者工具复制完整 Cookie 粘贴到上方",
+    "cookiePlaceholder": "SESSDATA=...; bili_jct=...; DedeUserID=...",
+    "state": {
+      "loading": "正在获取二维码…",
+      "pending": "请使用 B 站手机客户端扫码",
+      "scanned": "已扫码，请在手机上确认",
+      "success": "登录成功",
+      "expired": "二维码已过期",
+      "failed": "获取失败"
+    }
+  },
+  "nav": {
+    "home": "首页",
+    "rank": "榜单",
+    "bangumi": "番剧",
+    "mine": "我的"
+  },
+  "bangumi": {
+    "today": "今天",
+    "delayed": "延期",
+    "total": "全",
+    "episodes": "选集",
+    "noPlay": "该集暂不可播放（可能需要大会员）",
+    "weekday": {
+      "monday": "周一",
+      "tuesday": "周二",
+      "wednesday": "周三",
+      "thursday": "周四",
+      "friday": "周五",
+      "saturday": "周六",
+      "sunday": "周日"
+    }
+  },
+  "mine": {
+    "favorite": "收藏夹",
+    "history": "历史",
+    "toview": "稍后再看",
+    "following": "关注",
+    "empty": "这里还没有内容",
+    "needLogin": "登录后可查看",
+    "backToFolders": "返回收藏夹"
+  },
+  "rank": {
+    "popular": "热门",
+    "ranking": "排行榜"
+  },
+  "main": {
+    "refresh": "换一换",
+    "loading": "加载中…",
+    "error": "加载失败",
+    "retry": "重试",
+    "noMore": "没有更多了",
+    "views": "播放"
+  },
+  "search": {
+    "placeholder": "搜索视频",
+    "action": "搜索",
+    "results": "找到 {{count}} 个视频",
+    "empty": "没有找到相关视频",
+    "suggestions": "搜索建议",
+    "sortLabel": "排序",
+    "durationLabel": "时长",
+    "typeLabel": "类型",
+    "type": {
+      "video": "视频",
+      "bili_user": "UP主"
+    },
+    "userResults": "找到 {{count}} 位 UP主",
+    "order": {
+      "totalrank": "综合排序",
+      "click": "最多播放",
+      "pubdate": "最新发布",
+      "danmaku": "最多弹幕",
+      "stow": "最多收藏"
+    },
+    "duration": {
+      "all": "全部时长",
+      "short": "10分钟以下",
+      "medium": "10~30分钟",
+      "long": "30~60分钟",
+      "veryLong": "60分钟以上"
+    }
+  },
+  "download": {
+    "action": "下载",
+    "running": "下载中 {{percent}}%",
+    "openFolder": "打开文件夹",
+    "retry": "重试下载"
+  },
+  "video": {
+    "view": "播放",
+    "danmaku": "弹幕",
+    "like": "点赞",
+    "coin": "投币",
+    "favorite": "收藏",
+    "share": "转发",
+    "reply": "评论",
+    "desc": "简介",
+    "parts": "分P",
+    "quality": "清晰度",
+    "upHome": "UP主主页",
+    "openExternal": "在浏览器打开"
+  },
+  "space": {
+    "fans": "粉丝",
+    "following": "关注",
+    "videos": "视频",
+    "empty": "还没有投稿"
+  }
+}

@@ -1,0 +1,41 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource/noto-sans-sc/400.css";
+@import "@fontsource/noto-sans-sc/500.css";
+@import "@fontsource/noto-sans-sc/700.css";
+
+:root {
+  font-family:
+    "Inter Variable",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Segoe UI Emoji",
+    "Apple Color Emoji",
+    "Noto Color Emoji",
+    sans-serif;
+  line-height: 1.5;
+  color: #111827;
+  background: #f9fafb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root,
+.container {
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}

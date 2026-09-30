@@ -1,0 +1,119 @@
+.home {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.homeCard {
+  width: 100%;
+  max-width: 560px;
+  padding: 56px 40px;
+  text-align: center;
+  background: rgb(255 255 255 / 85%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgb(229 231 235 / 80%);
+  border-radius: 20px;
+  box-shadow: 0 20px 45px rgb(0 0 0 / 10%);
+}
+
+.homeTitle {
+  margin: 0 0 12px;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #111827;
+}
+
+.homeSubtitle {
+  margin: 0 0 20px;
+  font-size: clamp(0.9rem, 2.5vw, 1.125rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.homeText {
+  margin: 0 0 32px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+.homeLink {
+  display: inline-block;
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  background: #fb7299;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgb(251 114 153 / 35%);
+}
+
+.homeLink:focus-visible {
+  outline: 2px solid #fb7299;
+  outline-offset: 3px;
+}
+
+.homeLang {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.homeLangButton {
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 0.875rem;
+  color: #6b7280;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.homeLangButtonActive {
+  color: #fb7299;
+  background: rgb(251 114 153 / 10%);
+  border-color: #fb7299;
+}
+
+.homeLangButton:focus-visible {
+  outline: 2px solid #fb7299;
+  outline-offset: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .homeCard {
+    background: rgb(24 27 33 / 85%);
+    border-color: rgb(255 255 255 / 8%);
+    box-shadow: 0 20px 45px rgb(0 0 0 / 45%);
+  }
+
+  .homeTitle {
+    color: #f3f4f6;
+  }
+
+  .homeSubtitle {
+    color: #9ca3af;
+  }
+
+  .homeText {
+    color: #cbd5e1;
+  }
+
+  .homeLangButton {
+    color: #9ca3af;
+    border-color: rgb(255 255 255 / 12%);
+  }
+
+  .homeLangButtonActive {
+    color: #fb7299;
+    border-color: #fb7299;
+  }
+}

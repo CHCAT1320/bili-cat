@@ -1,0 +1,19 @@
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  /* 让 useScrollAnchor 独占滚动补偿，避免与浏览器的 scroll anchoring 叠加 */
+  overflow-anchor: none;
+}
+
+.videoSkeleton {
+  aspect-ratio: 16 / 9;
+  background: #e9eaec;
+  border-radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .videoSkeleton {
+    background: #23262d;
+  }
+}

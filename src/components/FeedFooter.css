@@ -1,0 +1,20 @@
+.feedFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+  padding: 24px 0 8px;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.feedSentinel {
+  width: 100%;
+  height: 1px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .feedFooter {
+    color: #9ca3af;
+  }
+}

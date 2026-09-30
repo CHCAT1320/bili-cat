@@ -1,0 +1,47 @@
+.rank {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.rankBody {
+  flex: 1;
+  padding: 20px 28px 40px;
+}
+
+.rankTabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.rankTab {
+  padding: 7px 20px;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #374151;
+  background: #f3f4f6;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.rankTabActive {
+  color: #fb7299;
+  background: rgb(251 114 153 / 10%);
+  border-color: #fb7299;
+}
+
+.rankTab:focus-visible {
+  outline: 2px solid #fb7299;
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .rankTab {
+    color: #d1d5db;
+    background: #23262d;
+  }
+}

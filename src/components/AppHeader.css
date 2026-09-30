@@ -1,0 +1,274 @@
+.appHeader {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 28px;
+  background: rgb(255 255 255 / 88%);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.appLogo {
+  flex: none;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fb7299;
+  text-decoration: none;
+}
+
+.appNav {
+  display: flex;
+  flex: none;
+  gap: 4px;
+}
+
+.appNavLink {
+  padding: 6px 12px;
+  font-size: 0.875rem;
+  color: #4b5563;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.appNavLinkActive {
+  color: #fb7299;
+  background: rgb(251 114 153 / 10%);
+}
+
+.appNavLink:focus-visible {
+  outline: 2px solid #fb7299;
+  outline-offset: 2px;
+}
+
+.appSearch {
+  position: relative;
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  max-width: 520px;
+}
+
+.appSearchBox {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.appSearchInput {
+  width: 100%;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 0.875rem;
+  color: #111827;
+  background: #f3f4f6;
+  border: 1px solid transparent;
+  border-radius: 999px;
+}
+
+.appSuggest {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  max-height: 320px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgb(0 0 0 / 12%);
+}
+
+.appSuggestItem {
+  overflow: hidden;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  color: #111827;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.appSuggestItemActive {
+  background: #f3f4f6;
+}
+
+.appSearchInput::placeholder {
+  color: #9ca3af;
+}
+
+.appSearchInput:focus {
+  outline: none;
+  background: #fff;
+  border-color: #fb7299;
+}
+
+.appSearchButton,
+.appButton {
+  flex: none;
+  padding: 8px 18px;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.appSearchButton {
+  color: #fff;
+  background: #fb7299;
+  border-color: #fb7299;
+}
+
+.appButton:disabled {
+  color: #9ca3af;
+  cursor: default;
+}
+
+.appSearchButton:focus-visible,
+.appButton:focus-visible {
+  outline: 2px solid #fb7299;
+  outline-offset: 2px;
+}
+
+.appActions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.appAccount {
+  position: relative;
+}
+
+.appAccountButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px 4px 4px;
+  font: inherit;
+  font-size: 0.875rem;
+  color: #374151;
+  background: #f3f4f6;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.appAccountAvatar {
+  width: 28px;
+  height: 28px;
+  background: #e9eaec;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.appAccountName {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.appAccountMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  min-width: 140px;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgb(0 0 0 / 12%);
+}
+
+.appAccountMenuItem {
+  width: 100%;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  color: #374151;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.appAccountButton:focus-visible,
+.appAccountMenuItem:focus-visible {
+  outline: 2px solid #fb7299;
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .appHeader {
+    background: rgb(18 20 24 / 88%);
+    border-bottom-color: rgb(255 255 255 / 8%);
+  }
+
+  .appSearchInput {
+    color: #f3f4f6;
+    background: #23262d;
+  }
+
+  .appNavLink {
+    color: #9ca3af;
+  }
+
+  .appSearchInput:focus {
+    background: #1a1c21;
+  }
+
+  .appSuggest {
+    background: #1c1f25;
+    border-color: rgb(255 255 255 / 10%);
+    box-shadow: 0 12px 28px rgb(0 0 0 / 45%);
+  }
+
+  .appSuggestItem {
+    color: #e5e7eb;
+  }
+
+  .appSuggestItemActive {
+    background: #23262d;
+  }
+
+  .appButton {
+    color: #d1d5db;
+    background: #1c1f25;
+    border-color: rgb(255 255 255 / 10%);
+  }
+
+  .appAccountButton {
+    color: #d1d5db;
+    background: #23262d;
+  }
+
+  .appAccountAvatar {
+    background: #2f333c;
+  }
+
+  .appAccountMenu {
+    background: #1c1f25;
+    border-color: rgb(255 255 255 / 10%);
+  }
+
+  .appAccountMenuItem {
+    color: #d1d5db;
+  }
+}
