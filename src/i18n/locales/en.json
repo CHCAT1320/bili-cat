@@ -1,9 +1,20 @@
 {
   "home": {
-    "title": "Welcome👋",
-    "subtitle": "Bili-Cat",
-    "text": "Here you can discover all kinds of interesting content.",
-    "cta": "Start exploring"
+    "title": "Bili-Cat",
+    "tagline": "A nicer desktop client for Bilibili",
+    "text": "Recommendations, search, anime, feed and messages in one place — with HD playback, danmaku, tree comments and quality downloads.",
+    "cta": "Start exploring",
+    "search": "Search videos",
+    "mine": "My favorites",
+    "featuresTitle": "Features",
+    "feature": {
+      "recommend": { "title": "Recommendations", "desc": "Endless personalized feed" },
+      "player": { "title": "HD playback", "desc": "DASH HD, danmaku and quality downloads" },
+      "comments": { "title": "Tree comments", "desc": "Threaded replies, likes and collapse" },
+      "dynamic": { "title": "Feed", "desc": "Following and hot posts in one place" },
+      "message": { "title": "Messages", "desc": "Replies, mentions, likes and DMs" },
+      "bangumi": { "title": "Anime", "desc": "Air-time table and season details" }
+    }
   },
   "common": {
     "back": "Back"

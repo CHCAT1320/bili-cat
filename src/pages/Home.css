@@ -1,15 +1,17 @@
 .home {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 40px 24px;
+  gap: 32px;
+  padding: 48px 24px 64px;
+  overflow-y: auto;
 }
 
 .homeCard {
   width: 100%;
-  max-width: 560px;
-  padding: 56px 40px;
+  max-width: 620px;
+  padding: 48px 40px;
   text-align: center;
   background: rgb(255 255 255 / 85%);
   backdrop-filter: blur(12px);
@@ -18,8 +20,15 @@
   box-shadow: 0 20px 45px rgb(0 0 0 / 10%);
 }
 
+.homeLogo {
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 18px;
+}
+
 .homeTitle {
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 700;
   line-height: 1.2;
@@ -28,33 +37,48 @@
 }
 
 .homeSubtitle {
-  margin: 0 0 20px;
-  font-size: clamp(0.9rem, 2.5vw, 1.125rem);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #6b7280;
+  margin: 0 0 18px;
+  font-size: clamp(0.9rem, 2.5vw, 1.0625rem);
+  letter-spacing: 0.04em;
+  color: #fb7299;
 }
 
 .homeText {
-  margin: 0 0 32px;
-  font-size: 1rem;
+  margin: 0 0 28px;
+  font-size: 0.9375rem;
   line-height: 1.7;
   color: #4b5563;
 }
 
+.homeActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
 .homeLink {
   display: inline-block;
-  padding: 12px 32px;
-  font-size: 1rem;
+  padding: 11px 26px;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: #fff;
   text-decoration: none;
   background: #fb7299;
+  border: 1px solid #fb7299;
   border-radius: 999px;
-  box-shadow: 0 8px 20px rgb(251 114 153 / 35%);
+  box-shadow: 0 8px 20px rgb(251 114 153 / 30%);
 }
 
-.homeLink:focus-visible {
+.homeLinkGhost {
+  color: #fb7299;
+  background: transparent;
+  box-shadow: none;
+}
+
+.homeLink:focus-visible,
+.homeLangButton:focus-visible,
+.homeFeature:focus-visible {
   outline: 2px solid #fb7299;
   outline-offset: 3px;
 }
@@ -63,7 +87,7 @@
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 28px;
+  margin-top: 26px;
 }
 
 .homeLangButton {
@@ -83,9 +107,65 @@
   border-color: #fb7299;
 }
 
-.homeLangButton:focus-visible {
-  outline: 2px solid #fb7299;
-  outline-offset: 3px;
+.homeFeatures {
+  width: 100%;
+  max-width: 900px;
+}
+
+.homeFeaturesTitle {
+  margin: 0 0 16px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+  color: #111827;
+}
+
+.homeFeatureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.homeFeature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  color: inherit;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+.homeFeatureIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  color: #fb7299;
+  background: rgb(251 114 153 / 12%);
+  border-radius: 12px;
+}
+
+.homeFeatureText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.homeFeatureTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.homeFeatureDesc {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #6b7280;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -95,15 +175,14 @@
     box-shadow: 0 20px 45px rgb(0 0 0 / 45%);
   }
 
-  .homeTitle {
+  .homeTitle,
+  .homeFeaturesTitle,
+  .homeFeatureTitle {
     color: #f3f4f6;
   }
 
-  .homeSubtitle {
-    color: #9ca3af;
-  }
-
-  .homeText {
+  .homeText,
+  .homeFeatureDesc {
     color: #cbd5e1;
   }
 
@@ -115,5 +194,10 @@
   .homeLangButtonActive {
     color: #fb7299;
     border-color: #fb7299;
+  }
+
+  .homeFeature {
+    background: #1a1c21;
+    border-color: rgb(255 255 255 / 8%);
   }
 }

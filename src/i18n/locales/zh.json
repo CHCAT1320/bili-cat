@@ -1,9 +1,20 @@
 {
   "home": {
-    "title": "欢迎👋",
-    "subtitle": "Bili-Cat",
-    "text": "在这里，你可以找到各种有趣的内容。",
-    "cta": "开始探索"
+    "title": "Bili-Cat",
+    "tagline": "更好用的 B 站桌面客户端",
+    "text": "推荐、搜索、番剧、动态、消息一站式浏览，支持高清播放、弹幕、树形评论与清晰度下载。",
+    "cta": "开始探索",
+    "search": "搜索视频",
+    "mine": "我的收藏",
+    "featuresTitle": "功能一览",
+    "feature": {
+      "recommend": { "title": "首页推荐", "desc": "无限下拉的个性化推荐流" },
+      "player": { "title": "高清播放", "desc": "DASH 高清、弹幕与清晰度下载" },
+      "comments": { "title": "树形评论", "desc": "多级回复、点赞与折叠" },
+      "dynamic": { "title": "动态", "desc": "关注与热门动态一网打尽" },
+      "message": { "title": "消息", "desc": "回复、@、点赞与私信" },
+      "bangumi": { "title": "番剧", "desc": "更新时间表与剧集详情" }
+    }
   },
   "common": {
     "back": "返回"

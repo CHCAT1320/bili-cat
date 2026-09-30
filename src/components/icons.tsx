@@ -117,6 +117,53 @@ export function IconPlay({ size = 14, className }: IconProps) {
   );
 }
 
+/** bili-cat 应用图标：B站小电视造型 + 猫元素（猫瞳/猫鼻/猫须） */
+export function BiliCatLogo({ size = 40, className }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 128 128"
+      className={className}
+      role="img"
+      aria-label="bili-cat"
+    >
+      <g stroke="#fb7299" strokeWidth="8" strokeLinecap="round" fill="none">
+        <path d="M52 40 L30 12" />
+        <path d="M76 40 L98 12" />
+      </g>
+      <rect x="10" y="36" width="108" height="78" rx="24" fill="#fb7299" />
+      <rect x="38.5" y="54" width="15" height="30" rx="7.5" fill="#ffffff" />
+      <rect x="74.5" y="54" width="15" height="30" rx="7.5" fill="#ffffff" />
+      <ellipse cx="46" cy="69" rx="2.6" ry="8" fill="#3a2c33" />
+      <ellipse cx="82" cy="69" rx="2.6" ry="8" fill="#3a2c33" />
+      <circle cx="47.2" cy="65" r="1.3" fill="#ffffff" />
+      <circle cx="83.2" cy="65" r="1.3" fill="#ffffff" />
+      <path d="M59.5 87 L68.5 87 L64 92.5 Z" fill="#ffffff" />
+      <path
+        d="M64 92.5 C64 97 58.5 98 57 94.5"
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth="2.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M64 92.5 C64 97 69.5 98 71 94.5"
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth="2.8"
+        strokeLinecap="round"
+      />
+      <g stroke="#ffffff" strokeWidth="2.4" strokeLinecap="round" opacity="0.92">
+        <path d="M15 81 L33 85" />
+        <path d="M15 93 L33 93" />
+        <path d="M95 85 L113 81" />
+        <path d="M95 93 L113 93" />
+      </g>
+    </svg>
+  );
+}
+
 /** 性别图标，取自 BewlyCat（commentUserInfo.ts） */
 export function CommentSexIcon({ sex, className }: { sex: string; className?: string }) {
   const male =
