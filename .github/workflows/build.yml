@@ -17,7 +17,19 @@ permissions:
   contents: write
 
 jobs:
+  # push main 时先清掉旧的 nightly 草稿，避免同名安装包资产冲突
+  reset-nightly:
+    if: github.event_name == 'push' && github.ref_type != 'tag'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete previous nightly draft
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release delete nightly --yes --cleanup-tag || true
+
   build:
+    needs: [reset-nightly]
+    if: ${{ !cancelled() }}
     strategy:
       fail-fast: false
       matrix:
@@ -62,16 +74,19 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
 
-      - name: Build app (and publish release on tag)
+      - name: Build app (and publish draft release)
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
-          releaseName: ${{ github.ref_type == 'tag' && format('bili-cat {0}', github.ref_name) || '' }}
-          releaseBody: "See the assets to download and install this version."
+          # push tag -> 以 tag 名创建草稿；push main -> 滚动更新 nightly 草稿；PR 不发布
+          tagName: ${{ github.event_name == 'push' && (github.ref_type == 'tag' && github.ref_name || 'nightly') || '' }}
+          releaseName: ${{ github.ref_type == 'tag' && format('Bili-Cat {0}', github.ref_name) || 'Bili-Cat nightly' }}
+          releaseBody: |
+            Automated draft release with Windows / Linux / macOS bundles.
+            自动构建的草稿 Release，包含 Windows / Linux / macOS 安装包。
           releaseDraft: true
-          prerelease: false
+          prerelease: ${{ github.ref_type != 'tag' }}
           args: ${{ matrix.args }}
 
       - name: Upload bundles
